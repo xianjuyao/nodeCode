@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>01-在浏览器中使用模板引擎</title>
+		<!--在浏览器中需要引入该文件-->
+		<script src="../code/node_modules/art-template/lib/template-web.js"></script>
+	</head>
+	<body>
+		<script type="text/template" id="tp">
+			hello{{name}}
+		</script>
+		<script type="text/javascript">
+			window.onload=function () {
+				const result = template("tp", {
+					name: "jack"
+				});
+				console.log(result);
+			};
+		</script>
+	</body>
+</html>

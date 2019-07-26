@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise</title>
+</head>
+<body>
+<form action="">
+    <div>
+        <label for="name">姓名:</label>
+        <input type="text" value="" id="name">
+    </div>
+    <div>
+        <label for="age">年龄:</label>
+        <input type="text" value="" id="age">
+    </div>
+    <div>
+        <label for="jobs">职业</label>
+        <select name="" id="jobs">
+        </select>
+    </div>
+</form>
+<script type="text/javascript">
+    function get(url,callback) {
+        var xmlhttp;
+        //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xmlhttp=new XMLHttpRequest();
+        //请求成功后调用回调函数
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                callback(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+    }
+
+    get("../data/data.json",function (data) {
+            let info=JSON.parse(data);
+            let name=document.getElementById("name");
+            let age=document.getElementById("age");
+            name.value=info.users[2].username;
+            age.value=info.users[2].age;
+            let jobs=document.getElementById("jobs");
+            for (let i=0;i<info.jobs.length;i++){
+                let node=document.createElement("option");
+                node.innerHTML=info.jobs[i].name;
+                if (info.users[2].job===info.jobs[i].id) node.selected="selected";
+                jobs.appendChild(node);
+            }
+    });
+</script>
+</body>
+</html>

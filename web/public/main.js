@@ -1,0 +1,1 @@
+window.alert("优秀的一匹");
